@@ -124,6 +124,7 @@ dependencies = [
 name = "story_generaters"
 version = "0.1.0"
 dependencies = [
+ "rand",
  "rand_distr",
 ]
 
