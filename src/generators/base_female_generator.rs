@@ -1,7 +1,5 @@
 use rand_distr::{Distribution, Normal};
 
-
-
 // 定数
 const BASE_FEMALE_MEAN_HEIGHT: f32 = 1569.0;
 const BASE_FEMALE_HEIGHT_STD: f32 = 68.0;
