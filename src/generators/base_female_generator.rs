@@ -23,6 +23,24 @@ pub struct BaseFemale {
     pub hip: f32,
 }
 
+#[derive(Debug ,PartialEq)]
+pub enum CupSize {
+    AAA,
+    AA
+}
+
+impl BaseFemale {
+    pub fn cup_size(&self) -> CupSize {
+        let sub = self.bust - self.under_bust;
+
+        if sub < 6.5 {
+            return CupSize::AAA
+        }
+
+        CupSize::AA
+    }
+}
+
 pub fn generate_base_female() -> BaseFemale {
     let waist = sample_from_normal(BASE_FEMALE_MEAN_WAIST, BASE_FEMALE_WAIST_STD);
 
@@ -68,4 +86,20 @@ fn test_generate_base_female() {
         assert!(result.under_bust < result.bust);
         assert!(result.under_bust < result.hip);
     }
+}
+
+#[test]
+fn test_cup_size() {
+    let sut = BaseFemale {
+        height: 1500.0,
+        wight: 50.0,
+        bust: 72.0,
+        under_bust: 65.6,
+        waist: 50.0,
+        hip: 80.0
+    };
+
+    let result = sut.cup_size();
+
+    assert_eq!(result, CupSize::AAA);
 }
