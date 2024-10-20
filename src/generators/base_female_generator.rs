@@ -1,3 +1,5 @@
+use core::fmt;
+
 use rand_distr::{Distribution, Normal};
 use rstest::rstest;
 
@@ -39,6 +41,26 @@ pub enum CupSize {
     I,
     J,
     K
+}
+
+impl fmt::Display for CupSize {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            CupSize::AAA => write!(f, "AAA"),
+            CupSize::AA => write!(f, "AA"),
+            CupSize::A => write!(f, "A"),
+            CupSize::B => write!(f, "B"),
+            CupSize::C => write!(f, "C"),
+            CupSize::D => write!(f, "D"),
+            CupSize::E => write!(f, "E"),
+            CupSize::F => write!(f, "F"),
+            CupSize::G => write!(f, "G"),
+            CupSize::H => write!(f, "H"),
+            CupSize::I => write!(f, "I"),
+            CupSize::J => write!(f, "J"),
+            CupSize::K => write!(f, "K")
+        }
+    }
 }
 
 impl BaseFemale {
