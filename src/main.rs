@@ -1,13 +1,21 @@
-use generators::base_female_generator::generate_base_female;
+use generators::base_female_generator::{generate_base_female, BaseFemale};
 
 mod generators;
+
+fn display_header() {
+    let header = "身長,体重,バスト,アンダーバスト,カップサイズ,ウエスト,ヒップ";
+    println!("{}", header);
+}
+
+fn display_base_female(base_female: &BaseFemale) {
+    println!("{},{},{},{},{},{},{}", base_female.height, base_female.wight, base_female.bust, base_female.under_bust, base_female.cup_size(), base_female.waist, base_female.hip);
+}
 fn main() {
-    let female = generate_base_female();
-    println!("身長:{}", female.height);
-    println!("体重:{}", female.wight);
-    println!("バスト:{}", female.bust);
-    println!("アンダーバスト:{}", female.under_bust);
-    println!("カップ数:{}", female.cup_size());
-    println!("ウエスト:{}", female.waist);
-    println!("ヒップ:{}", female.hip);
+
+    display_header();
+
+    for _ in 0..1000 {
+        let female = generate_base_female();
+        display_base_female(&female);
+    }
 }
