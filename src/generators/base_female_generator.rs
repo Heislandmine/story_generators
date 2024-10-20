@@ -4,18 +4,18 @@ use rand_distr::{Distribution, Normal};
 use rstest::rstest;
 
 // 定数
-const BASE_FEMALE_MEAN_HEIGHT: f32 = 1569.0;
-const BASE_FEMALE_HEIGHT_STD: f32 = 68.0;
+const BASE_FEMALE_MEAN_HEIGHT: f32 = 156.9;
+const BASE_FEMALE_HEIGHT_STD: f32 = 6.8;
 const BASE_FEMALE_MEAN_WIGHT: f32 = 52.0;
 const BASE_FEMALE_WIGHT_STD: f32 = 7.0;
-const BASE_FEMALE_MEAN_BUST: f32 = 845.0;
-const BASE_FEMALE_BUST_STD: f32 = 62.0;
-const BASE_FEMALE_MEAN_UNDER_BUST: f32 = 718.0;
-const BASE_FEMALE_UNDER_BUST_STD: f32 = 51.0;
-const BASE_FEMALE_MEAN_WAIST: f32 = 664.0;
-const BASE_FEMALE_WAIST_STD: f32 = 72.0;
-const BASE_FEMALE_MEAN_HIP: f32 = 897.0;
-const BASE_FEMALE_HIP_STD: f32 = 45.0;
+const BASE_FEMALE_MEAN_BUST: f32 = 84.5;
+const BASE_FEMALE_BUST_STD: f32 = 6.2;
+const BASE_FEMALE_MEAN_UNDER_BUST: f32 = 71.8;
+const BASE_FEMALE_UNDER_BUST_STD: f32 = 5.1;
+const BASE_FEMALE_MEAN_WAIST: f32 = 66.4;
+const BASE_FEMALE_WAIST_STD: f32 = 7.2;
+const BASE_FEMALE_MEAN_HIP: f32 = 89.7;
+const BASE_FEMALE_HIP_STD: f32 = 4.5;
 
 pub struct BaseFemale {
     pub height: f32,
