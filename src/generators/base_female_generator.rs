@@ -1,4 +1,5 @@
 use rand_distr::{Distribution, Normal};
+use rstest::rstest;
 
 // 定数
 const BASE_FEMALE_MEAN_HEIGHT: f32 = 1569.0;
@@ -26,7 +27,18 @@ pub struct BaseFemale {
 #[derive(Debug ,PartialEq)]
 pub enum CupSize {
     AAA,
-    AA
+    AA,
+    A,
+    B,
+    C,
+    D,
+    E,
+    F,
+    G,
+    H,
+    I,
+    J,
+    K
 }
 
 impl BaseFemale {
@@ -35,9 +47,31 @@ impl BaseFemale {
 
         if sub < 6.5 {
             return CupSize::AAA
+        } else if sub >= 6.5 && sub < 9.0 {
+            return CupSize::AA
+        } else if sub >= 9.0 && sub < 11.5 {
+            return CupSize::A
+        } else if sub >= 11.5 && sub < 14.0 {
+            return  CupSize::B;
+        } else if sub >= 14.0 && sub < 16.5 {
+            return CupSize::C;
+        } else if sub >= 16.5 && sub < 19.0 {
+            return  CupSize::D;
+        } else if sub >= 19.0 && sub < 21.5 {
+            return  CupSize::E;
+        } else if sub >= 21.5 && sub < 24.0 {
+            return  CupSize::F;
+        } else if sub >= 24.0 && sub < 26.5 {
+            return  CupSize::G;
+        } else if sub >= 26.5 && sub < 29.0 {
+            return  CupSize::H;
+        } else if sub >= 29.0 && sub < 31.5 {
+            return  CupSize::I;
+        } else if sub >= 31.5 && sub < 34.0 {
+            return  CupSize::J;
+        } else {
+            return CupSize::K
         }
-
-        CupSize::AA
     }
 }
 
@@ -88,18 +122,42 @@ fn test_generate_base_female() {
     }
 }
 
-#[test]
-fn test_cup_size() {
+#[rstest]
+#[case(72.0, 65.6, CupSize::AAA)]
+#[case(72.0, 65.5, CupSize::AA)]
+#[case(92.0, 83.1, CupSize::AA)]
+#[case(92.0, 83.0, CupSize::A)]
+#[case(92.0, 80.6, CupSize::A)]
+#[case(92.0, 80.5, CupSize::B)]
+#[case(92.0, 78.1, CupSize::B)]
+#[case(92.0, 78.0, CupSize::C)]
+#[case(92.0, 75.6, CupSize::C)]
+#[case(92.0, 75.5, CupSize::D)]
+#[case(92.0, 73.1, CupSize::D)]
+#[case(92.0, 73.0, CupSize::E)]
+#[case(92.0, 70.6, CupSize::E)]
+#[case(92.0, 70.5, CupSize::F)]
+#[case(92.0, 68.1, CupSize::F)]
+#[case(92.0, 68.0, CupSize::G)]
+#[case(92.0, 65.6, CupSize::G)]
+#[case(92.0, 65.5, CupSize::H)]
+#[case(92.0, 63.1, CupSize::H)]
+#[case(92.0, 63.0, CupSize::I)]
+#[case(92.0, 60.6, CupSize::I)]
+#[case(92.0, 60.5, CupSize::J)]
+#[case(92.0, 58.1, CupSize::J)]
+#[case(92.0, 58.0, CupSize::K)]
+fn test_cup_size(#[case] bust:  f32, #[case] under_bust: f32, #[case] expected_cup_size: CupSize) {
     let sut = BaseFemale {
         height: 1500.0,
         wight: 50.0,
-        bust: 72.0,
-        under_bust: 65.6,
+        bust,
+        under_bust,
         waist: 50.0,
         hip: 80.0
     };
 
     let result = sut.cup_size();
 
-    assert_eq!(result, CupSize::AAA);
+    assert_eq!(result, expected_cup_size);
 }
