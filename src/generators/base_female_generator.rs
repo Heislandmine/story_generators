@@ -26,7 +26,7 @@ pub struct BaseFemale {
     pub hip: f32,
 }
 
-#[derive(Debug ,PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum CupSize {
     AAA,
     AA,
@@ -40,7 +40,7 @@ pub enum CupSize {
     H,
     I,
     J,
-    K
+    K,
 }
 
 impl fmt::Display for CupSize {
@@ -58,7 +58,7 @@ impl fmt::Display for CupSize {
             CupSize::H => write!(f, "H"),
             CupSize::I => write!(f, "I"),
             CupSize::J => write!(f, "J"),
-            CupSize::K => write!(f, "K")
+            CupSize::K => write!(f, "K"),
         }
     }
 }
@@ -68,31 +68,31 @@ impl BaseFemale {
         let sub = self.bust - self.under_bust;
 
         if sub < 6.5 {
-            return CupSize::AAA
+            return CupSize::AAA;
         } else if sub >= 6.5 && sub < 9.0 {
-            return CupSize::AA
+            return CupSize::AA;
         } else if sub >= 9.0 && sub < 11.5 {
-            return CupSize::A
+            return CupSize::A;
         } else if sub >= 11.5 && sub < 14.0 {
-            return  CupSize::B;
+            return CupSize::B;
         } else if sub >= 14.0 && sub < 16.5 {
             return CupSize::C;
         } else if sub >= 16.5 && sub < 19.0 {
-            return  CupSize::D;
+            return CupSize::D;
         } else if sub >= 19.0 && sub < 21.5 {
-            return  CupSize::E;
+            return CupSize::E;
         } else if sub >= 21.5 && sub < 24.0 {
-            return  CupSize::F;
+            return CupSize::F;
         } else if sub >= 24.0 && sub < 26.5 {
-            return  CupSize::G;
+            return CupSize::G;
         } else if sub >= 26.5 && sub < 29.0 {
-            return  CupSize::H;
+            return CupSize::H;
         } else if sub >= 29.0 && sub < 31.5 {
-            return  CupSize::I;
+            return CupSize::I;
         } else if sub >= 31.5 && sub < 34.0 {
-            return  CupSize::J;
+            return CupSize::J;
         } else {
-            return CupSize::K
+            return CupSize::K;
         }
     }
 }
@@ -100,7 +100,8 @@ impl BaseFemale {
 pub fn generate_base_female() -> BaseFemale {
     let waist = sample_from_normal(BASE_FEMALE_MEAN_WAIST, BASE_FEMALE_WAIST_STD);
 
-    let mut under_bust = sample_from_normal(BASE_FEMALE_MEAN_UNDER_BUST, BASE_FEMALE_UNDER_BUST_STD);
+    let mut under_bust =
+        sample_from_normal(BASE_FEMALE_MEAN_UNDER_BUST, BASE_FEMALE_UNDER_BUST_STD);
     while waist > under_bust {
         under_bust = sample_from_normal(BASE_FEMALE_MEAN_UNDER_BUST, BASE_FEMALE_UNDER_BUST_STD);
     }
@@ -121,7 +122,7 @@ pub fn generate_base_female() -> BaseFemale {
         bust,
         under_bust,
         waist,
-        hip: hip
+        hip: hip,
     }
 }
 
@@ -169,14 +170,14 @@ fn test_generate_base_female() {
 #[case(92.0, 60.5, CupSize::J)]
 #[case(92.0, 58.1, CupSize::J)]
 #[case(92.0, 58.0, CupSize::K)]
-fn test_cup_size(#[case] bust:  f32, #[case] under_bust: f32, #[case] expected_cup_size: CupSize) {
+fn test_cup_size(#[case] bust: f32, #[case] under_bust: f32, #[case] expected_cup_size: CupSize) {
     let sut = BaseFemale {
         height: 1500.0,
         wight: 50.0,
         bust,
         under_bust,
         waist: 50.0,
-        hip: 80.0
+        hip: 80.0,
     };
 
     let result = sut.cup_size();
